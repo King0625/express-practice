@@ -24,13 +24,17 @@ exports.validate = (method) => {
 
 
 exports.index = (req, res, next) => {
-    const user = req.user;
-    res.status(200).json({
-        data: user,
-        request: {
-            method: "GET",
-            url: "http://localhost:3000/api/users"
-        }
+    // const user = req.user;
+    // console.log(user);
+    User.findAll().then(users => {
+        res.status(200).json({
+            data: users,
+            auth_user: req.user,
+            request: {
+                method: "GET",
+                url: "http://localhost:3000/api/users"
+            }
+        });
     });
 }
 

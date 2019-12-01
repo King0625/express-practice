@@ -1,3 +1,6 @@
+const Models = require('../models');
+const User = Models.User;
+
 exports.cors = (req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-type, Accept, Authorization');
@@ -9,6 +12,21 @@ exports.cors = (req, res, next) => {
 }
 
 exports.tokenAuth = (req, res, next) => {
-    req.user = "Authed User";
-    next();
+    const api_token = req.header('Authorization') || '';
+    User.findAll({
+        where: {
+            api_token: api_token
+        }
+    })
+    .then(user => {
+        if(user.length <= 0){
+            return res.status(403).json({
+                message: "Request forbidden"
+            })
+        }
+        req.user = user[0].name;
+        next();
+    })
+    
+    
 }
