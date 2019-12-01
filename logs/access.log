@@ -5,3 +5,6 @@
 ::1 - - [01/Dec/2019:04:11:30 +0000] "GET /api/register HTTP/1.1" 404 151 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
 ::1 - - [01/Dec/2019:04:11:54 +0000] "GET /api/register HTTP/1.1" 404 151 "-" "PostmanRuntime/7.19.0"
 ::1 - - [01/Dec/2019:04:11:59 +0000] "POST /api/register HTTP/1.1" 200 72 "-" "PostmanRuntime/7.19.0"
+::1 - - [01/Dec/2019:04:17:57 +0000] "GET /api/users HTTP/1.1" 200 68 "-" "PostmanRuntime/7.19.0"
+::1 - - [01/Dec/2019:04:18:03 +0000] "POST /api/register HTTP/1.1" 200 72 "-" "PostmanRuntime/7.19.0"
+::1 - - [01/Dec/2019:04:18:07 +0000] "POST /api/login HTTP/1.1" 200 69 "-" "PostmanRuntime/7.19.0"

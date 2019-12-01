@@ -1,31 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const userController = require('../controllers/userController');
 
-router.get('/users', (req, res, next) => {
-    res.status(200).json({
-        request: {
-            method: "GET",
-            url: "http://localhost:3000/api/users"
-        }
-    });
-});
+router.get('/users', userController.index);
 
-router.post('/register', (req, res, next) => {
-    res.status(200).json({
-        request: {
-            method: "POST",
-            url: "http://localhost:3000/api/register"
-        }
-    });
-})
+router.post('/register', userController.register);
 
-router.post('/login', (req, res, next) => {
-    res.status(200).json({
-        request: {
-            method: "POST",
-            url: "http://localhost:3000/api/login"
-        }
-    });
-})
+router.post('/login', userController.login);
 
 module.exports = router;
