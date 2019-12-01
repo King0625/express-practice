@@ -8,6 +8,7 @@ const apiRoutes = require('./routes/api');
 const apiMiddleware = require('./middlewares/api');
 const accessLogStream = fs.createWriteStream(path.join('logs', 'access.log'), { flags: 'a' })
 
+app.disable('etag');
 app.use(morgan('combined', {stream: accessLogStream}));
 
 // app.get('/', (req, res, next) => {
