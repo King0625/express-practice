@@ -1,14 +1,18 @@
 const express = require('express');
 const app = express();
+const port = 3000;
+
+const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
-const port = 3000;
 const apiRoutes = require('./routes/api');
 const apiMiddleware = require('./middlewares/api');
 const accessLogStream = fs.createWriteStream(path.join('logs', 'access.log'), { flags: 'a' })
 
 app.disable('etag');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(morgan('combined', {stream: accessLogStream}));
 
 // app.get('/', (req, res, next) => {
