@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 const messageController = require('../controllers/messageController');
+const apiMiddleware = require('../middlewares/api');
 
-router.get('/users', userController.index);
+router.get('/users', apiMiddleware.tokenAuth, userController.index);
 router.post('/register', userController.register);
 router.post('/login', userController.login);
 

@@ -7,3 +7,8 @@ exports.cors = (req, res, next) => {
     }
     next();
 }
+
+exports.tokenAuth = (req, res, next) => {
+    req.user = "Authed User";
+    next();
+}

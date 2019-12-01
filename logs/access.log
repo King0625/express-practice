@@ -19,3 +19,4 @@
 ::1 - - [01/Dec/2019:04:35:21 +0000] "GET /api/messages HTTP/1.1" 304 - "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
 ::1 - - [01/Dec/2019:04:36:30 +0000] "GET /api/messages HTTP/1.1" 200 71 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
 ::1 - - [01/Dec/2019:04:36:37 +0000] "GET /api/users HTTP/1.1" 200 68 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
+::1 - - [01/Dec/2019:04:45:00 +0000] "GET /api/users HTTP/1.1" 200 89 "-" "PostmanRuntime/7.19.0"
