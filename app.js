@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const port = 3000;
 const apiRoutes = require('./routes/api');
+const apiMiddleware = require('./middlewares/api');
 const accessLogStream = fs.createWriteStream(path.join('logs', 'access.log'), { flags: 'a' })
 
 app.use(morgan('combined', {stream: accessLogStream}));
@@ -14,6 +15,8 @@ app.use(morgan('combined', {stream: accessLogStream}));
 //         message: "Hello world"
 //     });
 // });
+
+app.use(apiMiddleware.cors);
 app.use('/api', apiRoutes);
 
 app.listen(port, () => {
