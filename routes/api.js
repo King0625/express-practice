@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
-const messageController = require('../controllers/messageController');
+const postController = require('../controllers/postController');
 const apiMiddleware = require('../middlewares/api');
 
 router.get('/users', apiMiddleware.tokenAuth, userController.index);
 router.post('/register', userController.validate('createUser'), userController.register);
 router.post('/login', userController.validate('login'), userController.login);
-router.post('/logout', apiMiddleware.tokenAuth, userController.logout);
 
-router.get('/messages', messageController.index);
-router.post('/messages', messageController.store);
+router.get('/posts', postController.index);
+
+router.use(apiMiddleware.tokenAuth);
+router.post('/logout', apiMiddleware.tokenAuth, userController.logout);
+router.post('/posts', postController.validate('createPost'), postController.store);
 
 
 module.exports = router;
