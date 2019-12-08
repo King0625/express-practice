@@ -8,9 +8,14 @@ exports.validate = (method) => {
     switch (method) {
         case 'createUser': {
             return [ 
-                body('email', 'Invalid email').exists().isEmail(),
-                body('name', 'user name doesn\'t exists').exists().isLength({min: 2}),
-                body('password').exists().isLength({min: 6}),
+                body('email').exists().withMessage('The email field is required!')
+                .isEmail().withMessage('Invalid email'),
+
+                body('name').exists().withMessage('The name field is required!')
+                .isLength({min: 2}).withMessage('The name field should contain at least 2 characters'),
+                
+                body('password').exists().withMessage('The password field is required!')
+                .isLength({min: 6}).withMessage('Password length should be at least 6')
             ]  
         }
         case 'login': {
