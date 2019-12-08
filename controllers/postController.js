@@ -107,7 +107,7 @@ exports.show = (req, res, next) => {
 
 exports.userPosts = (req, res, next) => {
     const userId = req.params.userId;
-    
+
     User.findAll({
         where: {
             id: userId
@@ -132,6 +132,87 @@ exports.userPosts = (req, res, next) => {
                 method: "GET",
                 url: "http://localhost:3000/api/users/" + userId + "/posts"
             }
+        })
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        });
+    });
+}
+
+exports.update = (req, res, next) => {
+    const user = req.user;
+    const postId = req.params.postId;
+    Post.findAll({
+        where:{
+            id: postId
+        }
+    })
+    .then(post => {
+        if(post.length === 0){
+            res.status(404).json({
+                message: "Post not found"
+            });
+        }
+
+        if(post[0].userId != user.id){
+            res.status(403).json({
+                message: "You cannot edit other person's post"
+            });
+        }
+
+        const errors = validationResult(req); // Finds the validation errors in this request and wraps them in an object with handy functions
+
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        post[0].update({
+            'topic': req.body.topic,
+            'content' : req.body.content
+        });
+        res.status(200).json({
+            message: "Post updated successfully",
+            data: post,
+            request: {
+                method: "PUT",
+                url: "http://localhost:3000/api/posts/" + postId
+            }
+        })
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        });
+    });
+}
+
+exports.destroy = (req, res, next) => {
+    const user = req.user;
+    const postId = req.params.postId;
+    Post.findAll({
+        where:{
+            id: postId
+        }
+    })
+    .then(post => {
+        if(post.length === 0){
+            res.status(404).json({
+                message: "Post not found"
+            });
+        }
+
+        if(post[0].userId != user.id){
+            res.status(403).json({
+                message: "You cannot delete other person's post"
+            });
+        }
+
+        post[0].destroy();
+        res.status(200).json({
+            message: "Post deleted successfully",
+            deleted_data: post,
         })
     })
     .catch(err => {

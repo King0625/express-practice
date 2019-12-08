@@ -15,6 +15,8 @@ router.get('/users/:userId/posts', postController.userPosts);
 router.use(apiMiddleware.tokenAuth);
 router.post('/logout', apiMiddleware.tokenAuth, userController.logout);
 router.post('/posts', postController.validate('createPost'), postController.store);
+router.put('/posts/:postId', postController.validate('createPost'), postController.update);
+router.delete('/posts/:postId', postController.destroy);
 
 
 module.exports = router;
