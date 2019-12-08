@@ -58,3 +58,27 @@
 ::1 - - [01/Dec/2019:08:00:16 +0000] "GET /api/users HTTP/1.1" 200 383 "-" "PostmanRuntime/7.19.0"
 ::1 - - [01/Dec/2019:08:00:34 +0000] "GET /api/users HTTP/1.1" 200 651 "-" "PostmanRuntime/7.19.0"
 ::1 - - [01/Dec/2019:08:00:43 +0000] "GET /api/users HTTP/1.1" 200 379 "-" "PostmanRuntime/7.19.0"
+::1 - - [06/Dec/2019:09:23:16 +0000] "POST /api/login HTTP/1.1" 422 131 "-" "PostmanRuntime/7.19.0"
+::1 - - [06/Dec/2019:09:24:08 +0000] "POST /api/login HTTP/1.1" 422 131 "-" "PostmanRuntime/7.19.0"
+::1 - - [06/Dec/2019:09:24:36 +0000] "POST /api/login HTTP/1.1" 422 131 "-" "PostmanRuntime/7.19.0"
+::1 - - [06/Dec/2019:09:26:24 +0000] "POST /api/login HTTP/1.1" 422 131 "-" "PostmanRuntime/7.19.0"
+::1 - - [06/Dec/2019:09:27:15 +0000] "POST /api/login HTTP/1.1" 422 148 "-" "PostmanRuntime/7.19.0"
+::1 - - [06/Dec/2019:09:28:08 +0000] "POST /api/login HTTP/1.1" 422 148 "-" "PostmanRuntime/7.19.0"
+::1 - - [06/Dec/2019:09:30:39 +0000] "POST /api/login HTTP/1.1" 422 148 "-" "PostmanRuntime/7.19.0"
+::1 - - [06/Dec/2019:09:31:21 +0000] "POST /api/login HTTP/1.1" 401 25 "-" "PostmanRuntime/7.19.0"
+::1 - - [06/Dec/2019:09:31:27 +0000] "POST /api/login HTTP/1.1" 200 161 "-" "PostmanRuntime/7.19.0"
+POST /api/login 200 161 - 130.177 ms
+GET /api/users 403 - 31 - 64.090 ms
+GET /api/users 403 - 31 - 64.599 ms
+GET /api/users 403 - 55.365 ms
+GET /api/users 403 - 53.5 ms
+Fri, 06 Dec 2019 09:37:21 GMT GET /api/users 403 - 56.2 ms
+Fri, 06 Dec 2019 09:37:45 GMT| GET /api/users 403 - 53.7 ms
+Fri, 06 Dec 2019 09:37:52 GMT| GET /api/users 403 - 3.1 ms
+Fri, 06 Dec 2019 09:39:56 GMT| GET /api/users 403 [object Object] 52.6 ms [object Object]
+Fri, 06 Dec 2019 09:40:13 GMT| GET /api/users 403 [object Object] 61.3 ms [object Object]
+Fri, 06 Dec 2019 09:41:54 GMT| GET /api/users 403 [object Object] 62.3 ms [object Object]
+Fri, 06 Dec 2019 09:42:12 GMT| GET /api/users 403 57.9 ms [object Object]
+Fri, 06 Dec 2019 09:45:22 GMT| GET /api/users 403 57.2 ms -
+Sun, 08 Dec 2019 02:51:43 GMT| POST /api/login 200 235.6 ms
+Sun, 08 Dec 2019 02:51:53 GMT| POST /api/login 200 139.0 ms

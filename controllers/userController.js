@@ -15,8 +15,8 @@ exports.validate = (method) => {
         }
         case 'login': {
             return [ 
-                body('email', 'Invalid email').exists(),
-                body('password').exists(),
+                body('email', 'Email field is empty').exists(),
+                body('password', 'Password field is empty').exists(),
             ]  
         }
     }
@@ -114,6 +114,9 @@ exports.login = (req, res, next) => {
                 }); 
             }
             if(result){
+                user[0].update({
+                    api_token: randomString({length: 50})
+                });
                 return res.status(200).json({
                     message: "Auth succeeded",
                     api_token: user[0].api_token,

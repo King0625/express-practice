@@ -13,7 +13,8 @@ const accessLogStream = fs.createWriteStream(path.join('logs', 'access.log'), { 
 app.disable('etag');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(morgan('combined', {stream: accessLogStream}));
+
+app.use(morgan(':date| :method :url :status :response-time[1] ms', {stream: accessLogStream}));
 
 // app.get('/', (req, res, next) => {
 //     res.status(200).json({
