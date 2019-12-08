@@ -5,8 +5,9 @@ const messageController = require('../controllers/messageController');
 const apiMiddleware = require('../middlewares/api');
 
 router.get('/users', apiMiddleware.tokenAuth, userController.index);
-router.post('/register',userController.validate('createUser'), userController.register);
-router.post('/login',userController.validate('login'), userController.login);
+router.post('/register', userController.validate('createUser'), userController.register);
+router.post('/login', userController.validate('login'), userController.login);
+router.post('/logout', apiMiddleware.tokenAuth, userController.logout);
 
 router.get('/messages', messageController.index);
 router.post('/messages', messageController.store);

@@ -24,7 +24,7 @@ exports.tokenAuth = (req, res, next) => {
                 message: "Request forbidden"
             })
         }
-        req.user = user[0].name;
+        req.user = user[0];
         next();
     })
     
