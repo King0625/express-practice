@@ -1,5 +1,6 @@
 const Models = require('../models');
 const Post = Models.Post;
+const User = Models.User;
 const { body, validationResult } = require('express-validator/check');
 
 exports.validate = (method) => {
@@ -48,5 +49,94 @@ exports.store = (req, res, next) => {
     });
 }
 exports.index = (req, res, next) => {
+    Post.findAll({
+        attributes: ['id', 'userId', 'topic', 'content', 'createdAt', 'updatedAt'],
+        include: [{
+            model: User,
+            attributes: ['id', 'name', 'email']
+        }]
+    }).then(posts => {
+        res.status(200).json({
+            data: posts,
+            request: {
+                method: "GET",
+                url: "http://localhost:3000/api/posts"
+            }
+        })
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        });
+    });
+}
 
+exports.show = (req, res, next) => {
+    const id = req.params.id;
+    Post.findAll({
+        attributes: ['id', 'userId', 'topic', 'content', 'createdAt', 'updatedAt'],
+        where: {
+            id: id,
+        },
+        include: [{
+            model: User,
+            attributes: ['id', 'name', 'email']
+        }]
+    })
+    .then(user => {
+        if(user.length === 0){
+            res.status(404).json({
+                message: "404 not found"
+            });
+        }
+
+        res.status(200).json({
+            data: user,
+            request: {
+                method: "GET",
+                url: "http://localhost:3000/api/posts/" + id
+            }
+        });
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        });
+    });
+}
+
+exports.userPosts = (req, res, next) => {
+    const userId = req.params.userId;
+    
+    User.findAll({
+        where: {
+            id: userId
+        }
+    }).then(user => {
+        if(user.length === 0){
+            return res.status(404).json({
+                message: 'User not found'
+            });
+        }    
+    })
+    
+    Post.findAll({
+        attributes: ['id', 'userId', 'topic', 'content', 'createdAt', 'updatedAt'],
+        where: {
+            userId: userId,
+        }
+    }).then(posts => {
+        res.status(200).json({
+            data: posts,
+            request: {
+                method: "GET",
+                url: "http://localhost:3000/api/users/" + userId + "/posts"
+            }
+        })
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        });
+    });
 }

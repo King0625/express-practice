@@ -9,6 +9,8 @@ router.post('/register', userController.validate('createUser'), userController.r
 router.post('/login', userController.validate('login'), userController.login);
 
 router.get('/posts', postController.index);
+router.get('/posts/:id', postController.show);
+router.get('/users/:userId/posts', postController.userPosts);
 
 router.use(apiMiddleware.tokenAuth);
 router.post('/logout', apiMiddleware.tokenAuth, userController.logout);
