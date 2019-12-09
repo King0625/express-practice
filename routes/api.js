@@ -12,11 +12,11 @@ router.get('/posts', postController.index);
 router.get('/posts/:id', postController.show);
 router.get('/users/:userId/posts', postController.userPosts);
 
-router.use(apiMiddleware.tokenAuth);
+// router.use(apiMiddleware.tokenAuth);
 router.post('/logout', apiMiddleware.tokenAuth, userController.logout);
-router.post('/posts', postController.validate('createPost'), postController.store);
-router.put('/posts/:postId', postController.validate('createPost'), postController.update);
-router.delete('/posts/:postId', postController.destroy);
+router.post('/posts', apiMiddleware.tokenAuth, postController.validate('createPost'), postController.store);
+router.put('/posts/:postId', apiMiddleware.tokenAuth, postController.validate('createPost'), postController.update);
+router.delete('/posts/:postId', apiMiddleware.tokenAuth, postController.destroy);
 
 
 module.exports = router;
