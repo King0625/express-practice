@@ -1,0 +1,4 @@
+林老師：U5e2a8294d2d7a413532836dc2502df1d
+連一人：Ub6ec62730d1b9b8adeaa397d81222fdb
+
+新建檔案：specialIdController, .gitignore( 圖片 )
