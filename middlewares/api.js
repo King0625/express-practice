@@ -9,6 +9,7 @@ exports.cors = (req, res, next) => {
         return res.status(200).json({});
     }
     next();
+    
 }
 
 exports.tokenAuth = (req, res, next) => {
