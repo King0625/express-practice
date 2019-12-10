@@ -1,6 +1,9 @@
 const Models = require('../models');
 const Post = Models.Post;
 const User = Models.User;
+const Category = Models.Category;
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 const { body, validationResult } = require('express-validator/check');
 
 exports.validate = (method) => {
@@ -11,7 +14,9 @@ exports.validate = (method) => {
                 .isLength({min: 2}).withMessage('Topic should contain at least 2 characters'),
                 
                 body('content').exists().withMessage('content cannot be null')
-                .isLength({min: 2}).withMessage('Content should contain at least 2 characters')
+                .isLength({min: 2}).withMessage('Content should contain at least 2 characters'),
+
+                // body('cat1').exists().withMessage('Must select at least one category')
             ];
         }
     }
@@ -26,27 +31,49 @@ exports.store = (req, res, next) => {
 
     const user = req.user;
     // console.log(user.id);
-    Post.create({
-        userId: user.id,
-        topic: req.body.topic,
-        content: req.body.content
-    })
-    .then(result => {
-        console.log(result);
-        res.status(201).json({
-            message: "Post created successfully",
-            data: result,
-            request: {
-                method: "POST",
-                url: "http://localhost:3000/api/posts"
+    Category.findAll({
+        where: {
+            id: {
+                [Op.or]:[1, 2]
             }
-        });
+        },
     })
-    .catch(err => {
-        res.status(500).json({
-            error: err
+    .then(categories => {
+        Post.create({
+            userId: user.id,
+            topic: req.body.topic,
+            content: req.body.content,
+        })
+        .then(post => {
+            // res.send(categories);`
+            // categories.setPosts(post)
+            post.setCategories(categories)
+            .then(() => {
+                post.getCategories({attributes: ['name']}).then(categories => {
+                    res.status(201).json({
+                        message: 'Post created successfully',
+                        data: {
+                            post: post,
+                            categories: categories
+                        }
+                    })
+                })
+                .catch(err => {
+                    res.send(err);
+                })
+            });
+            
+            
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
         });
-    });
+
+    }).catch(err => {
+        res.send(err);
+    })
 }
 exports.index = (req, res, next) => {
     Post.findAll({

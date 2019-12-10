@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Category.belongsToMany(models.Post, {
       through: 'CategoryPost',
-      foreignKey: 'postId'
+      // foreignKey: 'postId'
     });
   };
   return Category;
