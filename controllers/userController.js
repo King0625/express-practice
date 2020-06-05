@@ -2,7 +2,7 @@ const Models = require('../models');
 const User = Models.User;
 const bcrypt = require('bcrypt');
 const randomString = require('crypto-random-string');
-const { body, validationResult } = require('express-validator/check');
+const { body, validationResult } = require('express-validator');
 
 exports.validate = (method) => {
     switch (method) {

@@ -4,7 +4,7 @@ const User = Models.User;
 const Category = Models.Category;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-const { body, validationResult } = require('express-validator/check');
+const { body, validationResult } = require('express-validator');
 
 exports.validate = (method) => {
     switch (method) {
