@@ -24,6 +24,4 @@ app.use(morgan(':date| :method :url :status :response-time[1] ms', {stream: acce
 app.use(apiMiddleware.cors);
 app.use('/api', apiRoutes);
 
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-});
+module.exports = app;
