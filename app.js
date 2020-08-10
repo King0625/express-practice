@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
 const apiRoutes = require('./routes/api');
+const userRoutes = require('./routes/user');
 const apiMiddleware = require('./middlewares/api');
 const accessLogStream = fs.createWriteStream(path.join('logs', 'access.log'), { flags: 'a' })
 
@@ -22,6 +23,7 @@ app.use(morgan(':date| :method :url :status :response-time[1] ms', {stream: acce
 // });
 
 app.use(apiMiddleware.cors);
-app.use('/api', apiRoutes);
+// app.use('/api', apiRoutes);
+app.use('/api', userRoutes);
 
 module.exports = app;
