@@ -30,7 +30,6 @@ exports.validate = (method) => {
 
 exports.index = (req, res, next) => {
     // const user = req.user;
-    // console.log(user);
     User.findAll().then(users => {
         res.status(200).json({
             data: users,
@@ -73,7 +72,6 @@ exports.register = (req, res, next) => {
                         "admin": true
                     })
                     .then(result => {
-                        console.log(result);
                         res.status(201).json({
                             data: result,
                             request: {
@@ -141,7 +139,6 @@ exports.login = (req, res, next) => {
 
 exports.logout = (req, res, next) => {
     const user = req.user;
-    // console.log(user);
     user.update({
         'api_token': null
     })
