@@ -26,4 +26,6 @@ app.use(apiMiddleware.cors);
 // app.use('/api', apiRoutes);
 app.use('/api', userRoutes);
 
-module.exports = app;
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+});
