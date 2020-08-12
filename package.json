@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "npx sequelize-cli db:seed:all --env=test; jest",
     "test:watch": "jest --watchall",
     "start": "nodemon app.js"
   },
