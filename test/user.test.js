@@ -4,11 +4,6 @@ const request = require("supertest");
 
 const app = require("../app");
 
-beforeAll(async () => {
-  await User.destroy({
-    where: { email: "test@gmail.com" }
-  });
-});
 
 describe('/api/register', () => {
   test("should return user when the all request body is valid", async () => {
@@ -70,5 +65,9 @@ describe('/api/logout', () => {
 
 });
 
-
+afterAll(async () => {
+  await User.destroy({
+    truncate: true
+  });
+});
 
