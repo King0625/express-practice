@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const port = 3000;
 
 const morgan = require('morgan');
 const fs = require('fs');
@@ -25,9 +24,5 @@ app.use(morgan(':date| :method :url :status :response-time[1] ms', {stream: acce
 app.use(apiMiddleware.cors);
 // app.use('/api', apiRoutes);
 app.use('/api', userRoutes);
-
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-});
 
 module.exports = app;
