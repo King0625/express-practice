@@ -64,10 +64,3 @@ describe('/api/logout', () => {
   });
 
 });
-
-afterAll(async () => {
-  await User.destroy({
-    truncate: true
-  });
-});
-
